@@ -12,14 +12,18 @@ using MVC5Course.Models;
 
 namespace MVC5Course.Controllers
 {
+    
     [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        //TODO:我是test
+        //kio:ix
         public AccountController()
         {
+
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
