@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVC5Course.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,16 @@ namespace MVC5Course.Controllers
     {
         // GET: test
         public ActionResult Index()
+        {
+            return View();
+        }
+        
+        public ActionResult MemberProfile()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult MemberProfile(MemberViewModel data)
         {
             return View();
         }

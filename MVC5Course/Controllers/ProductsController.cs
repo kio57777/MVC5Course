@@ -48,7 +48,7 @@ namespace MVC5Course.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProductId,ProductName,Price,Active,Stock")] Product product)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) //判斷有無錯誤
             {
                 db.Product.Add(product);
                 db.SaveChanges();
