@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<button id="btnJsonTest">取得 JsonTest 資料</button>
+
+@section Scripts {
+
+    <script>
+        $('#btnJsonTest').bind('click', function () {
+            $.getJSON('/AFC/JsonTEST', '', function (data) {
+                console.log(data);
+            })
+        });
+    </script>
+}

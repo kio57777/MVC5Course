@@ -4,28 +4,28 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FabricsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FabricsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Client">
           <Key>
             <PropertyRef Name="ClientId" />
           </Key>
           <Property Name="ClientId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstName" Type="varchar" MaxLength="40" />
-          <Property Name="MiddleName" Type="varchar" MaxLength="40" />
-          <Property Name="LastName" Type="varchar" MaxLength="40" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
           <Property Name="Gender" Type="char" MaxLength="1" />
           <Property Name="DateOfBirth" Type="datetime" />
           <Property Name="CreditRating" Type="float" />
           <Property Name="XCode" Type="char" MaxLength="7" />
           <Property Name="OccupationId" Type="int" />
-          <Property Name="TelephoneNumber" Type="varchar" MaxLength="20" />
-          <Property Name="Street1" Type="varchar" MaxLength="100" />
-          <Property Name="Street2" Type="varchar" MaxLength="100" />
-          <Property Name="City" Type="varchar" MaxLength="100" />
+          <Property Name="TelephoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Street1" Type="nvarchar" MaxLength="100" />
+          <Property Name="Street2" Type="nvarchar" MaxLength="100" />
+          <Property Name="City" Type="nvarchar" MaxLength="100" />
           <Property Name="ZipCode" Type="varchar" MaxLength="15" />
           <Property Name="Longitude" Type="float" />
           <Property Name="Latitude" Type="float" />
-          <Property Name="Notes" Type="varchar(max)" />
+          <Property Name="Notes" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Occupation">
           <Key>
@@ -60,10 +60,36 @@
             <PropertyRef Name="ProductId" />
           </Key>
           <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ProductName" Type="varchar" MaxLength="80" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
           <Property Name="Price" Type="smallmoney" />
           <Property Name="Active" Type="bit" />
           <Property Name="Stock" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'C:\USERS\KIO\SOURCE\REPOS\MVC5COURSE\MVC5COURSE\APP_DATA\FABRICS.MDF.dbo.View_test' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="View_test">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="40" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="40" />
+          <Property Name="LastName" Type="varchar" MaxLength="40" />
+          <Property Name="Gender" Type="char" MaxLength="1" />
+          <Property Name="DateOfBirth" Type="datetime" />
+          <Property Name="CreditRating" Type="float" />
+          <Property Name="XCode" Type="char" MaxLength="7" />
+          <Property Name="OccupationId" Type="int" />
+          <Property Name="TelephoneNumber" Type="varchar" MaxLength="20" />
+          <Property Name="Street1" Type="varchar" MaxLength="100" />
+          <Property Name="Street2" Type="varchar" MaxLength="100" />
+          <Property Name="City" Type="varchar" MaxLength="100" />
+          <Property Name="ZipCode" Type="varchar" MaxLength="15" />
+          <Property Name="Longitude" Type="float" />
+          <Property Name="Latitude" Type="float" />
+          <Property Name="Notes" Type="varchar(max)" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Client_Occupation">
           <End Role="Occupation" Type="Self.Occupation" Multiplicity="0..1" />
@@ -123,6 +149,28 @@
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderLine" EntityType="Self.OrderLine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="View_test" EntityType="Self.View_test" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_test].[ClientId] AS [ClientId], 
+    [View_test].[FirstName] AS [FirstName], 
+    [View_test].[MiddleName] AS [MiddleName], 
+    [View_test].[LastName] AS [LastName], 
+    [View_test].[Gender] AS [Gender], 
+    [View_test].[DateOfBirth] AS [DateOfBirth], 
+    [View_test].[CreditRating] AS [CreditRating], 
+    [View_test].[XCode] AS [XCode], 
+    [View_test].[OccupationId] AS [OccupationId], 
+    [View_test].[TelephoneNumber] AS [TelephoneNumber], 
+    [View_test].[Street1] AS [Street1], 
+    [View_test].[Street2] AS [Street2], 
+    [View_test].[City] AS [City], 
+    [View_test].[ZipCode] AS [ZipCode], 
+    [View_test].[Longitude] AS [Longitude], 
+    [View_test].[Latitude] AS [Latitude], 
+    [View_test].[Notes] AS [Notes], 
+    [View_test].[OrderId] AS [OrderId]
+    FROM [dbo].[View_test] AS [View_test]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Client_Occupation" Association="Self.FK_Client_Occupation">
             <End Role="Occupation" EntitySet="Occupation" />
             <End Role="Client" EntitySet="Client" />
@@ -140,8 +188,7 @@
             <End Role="OrderLine" EntitySet="OrderLine" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FabricsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -150,22 +197,22 @@
             <PropertyRef Name="ClientId" />
           </Key>
           <Property Name="ClientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="MiddleName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="LastName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
           <Property Name="CreditRating" Type="Double" />
           <Property Name="XCode" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
           <Property Name="OccupationId" Type="Int32" />
-          <Property Name="TelephoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Street1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Street2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TelephoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Street1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Street2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ZipCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Longitude" Type="Double" />
           <Property Name="Latitude" Type="Double" />
-          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Occupation" Relationship="Self.FK_Client_Occupation" FromRole="Client" ToRole="Occupation" />
           <NavigationProperty Name="Order" Relationship="Self.fk_Order_ClientId" FromRole="Client" ToRole="Order" />
         </EntityType>
@@ -207,11 +254,12 @@
             <PropertyRef Name="ProductId" />
           </Key>
           <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Decimal" Precision="10" Scale="4" />
           <Property Name="Active" Type="Boolean" />
           <Property Name="Stock" Type="Decimal" Precision="18" Scale="3" />
           <NavigationProperty Name="OrderLine" Relationship="Self.fk_OrderLine_ProductId" FromRole="Product" ToRole="OrderLine" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_Client_Occupation">
           <End Role="Occupation" Type="Self.Occupation" Multiplicity="0..1" />
@@ -287,11 +335,35 @@
             <Parameter Name="CreateClients" Mode="In" Type="Int32" />
             <Parameter Name="CreateOrders" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="View_test" EntityType="FabricsModel.View_test" />
         </EntityContainer>
         <ComplexType Name="usp_Fabrics_Result">
           <Property Type="String" Name="Table" Nullable="false" MaxLength="10" />
           <Property Type="Int32" Name="Count" Nullable="true" />
         </ComplexType>
+        <EntityType Name="View_test">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+          <Property Name="CreditRating" Type="Double" />
+          <Property Name="XCode" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+          <Property Name="OccupationId" Type="Int32" />
+          <Property Name="TelephoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Street1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Street2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Longitude" Type="Double" />
+          <Property Name="Latitude" Type="Double" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -354,6 +426,7 @@
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="FabricsModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
@@ -370,6 +443,30 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="View_test">
+            <EntityTypeMapping TypeName="FabricsModel.View_test">
+              <MappingFragment StoreEntitySet="View_test">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Street2" ColumnName="Street2" />
+                <ScalarProperty Name="Street1" ColumnName="Street1" />
+                <ScalarProperty Name="TelephoneNumber" ColumnName="TelephoneNumber" />
+                <ScalarProperty Name="OccupationId" ColumnName="OccupationId" />
+                <ScalarProperty Name="XCode" ColumnName="XCode" />
+                <ScalarProperty Name="CreditRating" ColumnName="CreditRating" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

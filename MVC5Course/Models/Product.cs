@@ -11,7 +11,6 @@ namespace MVC5Course.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Product
     {
@@ -20,17 +19,13 @@ namespace MVC5Course.Models
         {
             this.OrderLine = new HashSet<OrderLine>();
         }
-      
+    
         public int ProductId { get; set; }
-        [Required] //必填
         public string ProductName { get; set; }
-        [Range(2, 99, ErrorMessage = "商品價格必須2~99之間!!")]
-        [Required] //必填
         public Nullable<decimal> Price { get; set; }
-        [Required] //必填
         public Nullable<bool> Active { get; set; }
-        [Required] //必填
         public Nullable<decimal> Stock { get; set; }
+        public bool isDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderLine> OrderLine { get; set; }

@@ -15,6 +15,7 @@ namespace MVC5Course
 
             routes.MapRoute(
                 name: "Default",
+                //url: "{controller}/{action}.aspx/{id}",//加.aspx可以騙人!!可任意改附檔名
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
