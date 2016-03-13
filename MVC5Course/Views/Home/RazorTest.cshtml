@@ -1,0 +1,56 @@
+﻿@model Int32[]
+<h2>RazorTest</h2>
+@foreach (var i in Model)
+{
+    @i
+}
+</br>
+@foreach (var i in Model)
+{
+
+    @i@(" ")
+    @(i+" ")
+
+}
+
+@*程式區塊*@
+<ul>
+@foreach (var i in Model)
+{
+    @:<li>@i</li> @*文字區塊*@
+}
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @{
+    ViewBag.Title = "RazorTest";
+    @*var i = true;
+        if (i)
+        {
+               @:1哈囉!
+              <p>2哈囉!</p>
+        }*@
+
+
+    }
+
+
+
+

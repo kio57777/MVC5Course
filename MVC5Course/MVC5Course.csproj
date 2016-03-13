@@ -185,8 +185,11 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MBController.cs" />
+    <Compile Include="Controllers\MEMBERController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\testController.cs" />
+    <Compile Include="ActionFilter\共同的viewbag資料共享於部份HomeController動作方法attribute.cs" />
+    <Compile Include="ActionFilter\紀錄Action的執行時間Attribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1181,6 +1184,9 @@
     <Content Include="Views\AFC\Index.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Views\MB\Index.cshtml" />
+    <Content Include="Views\MEMBER\Login.cshtml" />
+    <Content Include="Views\Shared\ErrorArgument.cshtml" />
+    <Content Include="Views\Home\RazorTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
